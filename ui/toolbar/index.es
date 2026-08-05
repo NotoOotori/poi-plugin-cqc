@@ -67,7 +67,7 @@ class ToolbarImpl extends PureComponent {
 
   handleExportDeckBuilderClipboard = () => {
     const {compo} = this.props
-    const encoded = JSON.stringify(cqcToDeckBuilder(compo))
+    const encoded = JSON.stringify(cqcToAircalcDeckBuilder(compo))
     clipboard.writeText(encoded)
     const {success} = window
     success(`Copied to clipboard (${new Date()})`)

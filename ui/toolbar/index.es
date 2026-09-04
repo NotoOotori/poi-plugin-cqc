@@ -65,12 +65,16 @@ class ToolbarImpl extends PureComponent {
     shell.openExternal(`https://noro6.github.io/kc-web#import:${encoded}`)
   }
 
-  handleExportDeckBuilderClipboard = () => {
+  handleExportDeckBuilderClipboard = async () => {
     const {compo} = this.props
     const encoded = JSON.stringify(cqcToAircalcDeckBuilder(compo))
-    clipboard.writeText(encoded)
-    const {success} = window
-    success(`Copied to clipboard (${new Date()})`)
+    try {
+      await navigator.clipboard.writeText(encoded)
+      const {success} = window
+      success(`Copied to clipboard (${new Date()})`)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+    }
   }
 
   handleExportWctf = () => {

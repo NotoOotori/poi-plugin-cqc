@@ -9,6 +9,8 @@ const cqcToDeckBuilder = cqc => {
           const id = ship.mstId
           const lv = _.isInteger(ship.level) ? ship.level : 99
           const luck = _.isInteger(ship.luck) ? ship.luck : -1
+          const asw = _.isInteger(ship.aswE) ? ship.aswE : undefined
+          const hp = _.isInteger(ship.hp) ? ship.hp : undefined
           const convertEquip = equip => {
             const dEquip = {id: equip.mstId}
             if (_.isInteger(equip.imp)) {
@@ -27,7 +29,10 @@ const cqcToDeckBuilder = cqc => {
           if (ship.exSlot) {
             items.ix = convertEquip(ship.exSlot)
           }
-          return [`s${sInd+1}`, {id, lv, luck, items}]
+          const sObj = {id, lv, luck, items}
+          if (asw !== undefined) sObj.asw = asw
+          if (hp !== undefined) sObj.hp = hp
+          return [`s${sInd+1}`, sObj]
         })
       )
 
@@ -52,6 +57,8 @@ const cqcToAircalcDeckBuilder = cqc => {
           const id = ship.mstId
           const lv = _.isInteger(ship.level) ? ship.level : 99
           const luck = _.isInteger(ship.luck) ? ship.luck : -1
+          const asw = _.isInteger(ship.aswE) ? ship.aswE : undefined
+          const hp = _.isInteger(ship.hp) ? ship.hp : undefined
           const convertEquip = equip => {
             const dEquip = {id: equip.mstId}
             if (_.isInteger(equip.imp)) {
@@ -70,7 +77,10 @@ const cqcToAircalcDeckBuilder = cqc => {
           if (ship.exSlot) {
             items.ix = convertEquip(ship.exSlot)
           }
-          return [`s${sInd+1}`, {id, lv, luck, items}]
+          const sObj = {id, lv, luck, items}
+          if (asw !== undefined) sObj.asw = asw
+          if (hp !== undefined) sObj.hp = hp
+          return [`s${sInd+1}`, sObj]
         })
       )
 
